@@ -1,0 +1,30 @@
+{
+	"app": {
+		"port": 7461
+	},
+	"db": {
+		"mongo": {
+			"claster": {
+				"name": "cluster0",
+				"region": "eu-central-1",
+				"shards": [{
+					"name": "shard-00-02",
+					"state": "primary",
+					"host": "hrkli.mongodb.net",
+					"port": 27017
+				}, {
+					"name": "shard-00-00",
+					"state": "secondary",
+					"host": "hrkli.mongodb.net",
+					"port": 27017
+				}, {
+					"name": "shard-00-01",
+					"state": "secondary",
+					"host": "hrkli.mongodb.net",
+					"port": 27017
+				}]
+			}
+		}
+
+	}
+}
