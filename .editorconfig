@@ -20,6 +20,13 @@ indent_style = tab
 indent_size = 4
 max_char = 120
 
+# setting for TypeScript files
+[**.ts]
+bin = node
+indent_style = tab
+indent_size = 4
+max_char = 120
+
 # settings for JSON files
 [**.json]
 indent_style = tab
@@ -29,4 +36,3 @@ indent_size = 2
 [**.jslintrc]
 indent_style = tab
 indent_size = 2
-
