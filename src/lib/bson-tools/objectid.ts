@@ -107,7 +107,7 @@ export class ObjectID implements iObjectID {
 	
 	/**
 	* Returns a 3-byte value representing the machine ID the {ObjectID}
-	* was senerated
+	* was generated
 	* @returns {Buffer}
 	*/
 	private getMachineBytes(): Buffer {
@@ -115,23 +115,43 @@ export class ObjectID implements iObjectID {
 		return Buffer.from(machine, 'hex');
 	}
 	
+	/**
+	* Returns a 2-byte value representing the process ID the {ObjectID}
+	* was generated
+	* @returns {Buffer}
+	*/
+	private getProcessBytes(): Buffer {
+		let process = this._process;
+		return Buffer.from(process.toString(16), 'hex');
+	}
+	
+	/**
+	* Returns a 3-byte value representing the {ObjectID} number
+	* within all ObjectIDs generated during this second
+	* @returns {Buffer}
+	*/
+	private getIndexBytes(): Buffer {
+		let index = this._index;
+		return Buffer.from(index.toString(16), 'hex');
+	}
 	
 	public toString(): String {
 			//TODO: a 4-byte value representing the seconds since the Unix epoch,
 		let time: any = this.getTimeBytes(),
 			//TODO: a 3-byte machine identifier,
-			machine: any = this.getMachineBytes(), = md5(this.machine).toString(16),
+			machine: any = this.getMachineBytes(),
 			//TODO: a 2-byte process id, and
-			p = this.process.toString(16),
+			process: any = this.getProcessBytes(),
 			//TODO: a 3-byte counter, starting with a random value.
-			i = this.number.toString(16);
+			index: any = this.getIndexBytes();
 
 		//TODO: for test purpose only!
-		objectID = `Created: ${c} Length: ${c.length}\n
-		Machine md5: [${m}] Length: ${m.length}\n
-		Process ID: [${p}] Length: ${p.length}\n
-		Number: [${n}] Length: ${n.length}`;
+		let debug = `Created: ${time} Length: ${time.length}\n
+		Machine md5: [${machine}] Length: ${machine.length}\n
+		Process ID: [${process}] Length: ${process.length}\n
+		Index: [${index}] Length: ${index.length}`;
 
-		return objectID;
+		return time.toString('hex') + machine.toString('hex')
+				+ process.toString('hex') + index.toString('hex');
 	}
 }
